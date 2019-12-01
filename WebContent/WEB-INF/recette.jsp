@@ -22,16 +22,21 @@
 			<c:forEach var="i" begin="${noteAverage + 1}" end="5">
 				<span class="fa fa-star "></span>
 			</c:forEach>
-			</br> 
+			</br>
 			<c:forEach items="${tags}" var="tag">
-				<span><a href="recette-by-tag?id=<c:out value="${tag.id}" />" name="rTag" id="rTag" style="color:white;">#${tag.nom}</a> <span class="iconify" data-icon="fa-regular:trash-alt" data-inline="false"></span></i>  </span>
+				<span><a href="recette-by-tag?id=<c:out value="${tag.id}" />"
+					name="rTag" id="rTag" style="color: white;">#${tag.nom}</a> <a
+					href="delete-tag-from-recipe?tag_id=${tag.id}&recette_id=${recette.id}">
+						<span class="iconify" data-icon="fa-regular:trash-alt"
+						data-inline="false" style="color: white;"></span>
+				</a> </span>
 			</c:forEach>
 			</br> </br>
-			<form name="tag" method="post" action="recette?id=<c:out value="${recette.id}" />">
-				 <SELECT
-					name="tag" id="tag" class="select">
+			<form name="tag" method="post"
+				action="recette?id=<c:out value="${recette.id}" />">
+				<SELECT name="tag" id="tag" class="select">
 					<c:forEach items="${allTags}" var="allTag">
-						<OPTION><c:out value="${allTag.nom}" />
+						<OPTION value="${allTag.id}"><c:out value="${allTag.nom}" />
 					</c:forEach>
 				</SELECT> <input type="submit" value="Ajouter" class="submitBtn" />
 
@@ -50,6 +55,16 @@
 	<hr />
 	<header>
 		<h2 id="titreIngredient">Ingrédients</h2>
+		</br>
+		</br>
+		<c:choose>
+			<c:when test="${not empty sessionScope.membre}">
+				<a class="primaryBtn ajoutIngredient" href="ajout-ingredient?id=${recette.id}">Ajouter
+					un ingredient</a>
+			</c:when>
+		</c:choose>
+		</br>
+			</br>
 		<ul>
 			<c:forEach items="${ingredients}" var="ingredient">
 				<li><c:out value="${ingredient.quantite}" /> <c:out

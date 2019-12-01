@@ -3,11 +3,7 @@
  */
 package fr.hb.tpblogrecette.services;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,12 +26,7 @@ import fr.hb.tpblogrecette.utils.HibernateUtil;
 public class CommentaireService {
 	
 
-	public CommentaireService(Connection connection){
-		
-	}
-public CommentaireService(){
-		
-	}
+
 
 	public Commentaire createCommentaire(Commentaire commentaire){
 		Transaction transaction = null;
@@ -171,7 +162,7 @@ public int getNoteAverageFromRecette(int idRecette){
 			Query query = session.createQuery(avgHql);
 			query.setInteger("id", idRecette);
 			
-			noteAverage = (Integer) query.uniqueResult();
+			noteAverage = (int) query.getSingleResult();
 
 			
 

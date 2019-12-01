@@ -4,18 +4,26 @@
 <div id="global">
 	<h1>Ajouter une recette</h1>
 	<div id="ajout">
-		<form method="post" action="ajoutRecette">
+		<form method="post" enctype="multipart/form-data"
+			action="ajout-recette">
 
 			<input id="titre" name="titre" type="text" class="inputChamp"
-				placeholder="Titre de la recette *" /><br /> <br />
+				placeholder="Titre de la recette *" /><br /> <br /> <SELECT
+				name="categorie" id="categorie" class="select">
+				<c:forEach items="${categories}" var="categorie">
+					<OPTION value="${categorie.id}"><c:out
+							value="${categorie.nom}" />
+				</c:forEach>
+			</SELECT><br /> <br />
 			<textarea id="description" name="description" rows="4"
-				placeholder="Description de la recette *" class="inputTextArea"></textarea><br /> <br />
-			<label for="avatar">Ajouter une photo de la recette :</label> <input
-				type="file" id="photo" name="photo" accept="image/png, image/jpeg" >
-			<br /> <br /> <input type="submit" value="Ajout" class="submitBtn" />
+				placeholder="Description de la recette *" class="inputTextArea"></textarea>
+			<br /> <br /> <label for="avatar">Ajouter une photo de la
+				recette :</label> <input type="file" name="file"> <br /> <br />
+			<input type="submit" value="Ajout" class="submitBtn" />
 		</form>
 	</div>
 	<div id="erreur">
 		<p>${erreur}</p>
 	</div>
-	<%@ include file="footer.jsp"%>
+</div>
+<%@ include file="footer.jsp"%>

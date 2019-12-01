@@ -1,8 +1,13 @@
 package fr.hb.tpblogrecette.model;
 
+
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -25,8 +30,8 @@ public class Tag {
 	@Column
 	protected String nom;
 
-	@ManyToMany(mappedBy = "tags", fetch = FetchType.LAZY)
-	private Collection<Recette> recettes;
+	@ManyToMany(mappedBy = "tags", fetch = FetchType.EAGER)
+	private Set<Recette> recettes = new HashSet<Recette>();
 
 	/**
 	 * @param nom
@@ -34,13 +39,13 @@ public class Tag {
 	public Tag(String nom) {
 		super();
 		this.nom = nom;
-		this.recettes = new ArrayList<Recette>();
+		
 
 	}
 	public Tag(String nom, Recette recette) {
 		super();
 		this.nom = nom;
-		this.recettes = new ArrayList<Recette>();
+		
 
 	}
 
@@ -49,16 +54,14 @@ public class Tag {
 	 */
 	public Tag() {
 		super();
-		this.recettes = new ArrayList<Recette>();
+		
 	}
 	
 	
 	/**
 	 * @param recettes the recettes to set
 	 */
-	public void setRecettes(Collection<Recette> recettes) {
-		this.recettes = recettes;
-	}
+	
 
 	/**
 	 * @return the nom
@@ -93,16 +96,17 @@ public class Tag {
 		return recettes;
 	}
 
-	public Collection<Recette> addRecette(Recette recette){
-		recettes.add(recette);
-		return  recettes;
+	public void addRecette(Recette recette){
+		this.recettes.add(recette);
+		recette.getTags().remove(this);
+		
 	}
 
-	public Collection<Recette> deleteRecette(Recette recette){
-		recettes.remove(recette);
-		return recettes;
+	public void deleteRecette(Recette recette){
+		this.recettes.remove(recette);
+		recette.getTags().remove(this);
 	}
 	
-
+	
 
 }

@@ -15,6 +15,7 @@ import java.util.List;
 import fr.hb.tpblogrecette.model.*;
 
 import fr.hb.tpblogrecette.services.CommentaireService;
+import fr.hb.tpblogrecette.services.ImageService;
 import fr.hb.tpblogrecette.services.IngredientService;
 import fr.hb.tpblogrecette.services.MembreService;
 import fr.hb.tpblogrecette.services.RecetteService;
@@ -47,9 +48,6 @@ public class RecetteServlet extends HttpServlet {
 
 
 		try {
-
-
-
 			int idRecette = Integer.parseInt(request.getParameter("id"));
 			RecetteService recetteService = new RecetteService();
 			fr.hb.tpblogrecette.model.Recette recette = recetteService.getRecetteFromId(idRecette);
@@ -64,23 +62,22 @@ public class RecetteServlet extends HttpServlet {
 			request.setAttribute("tags", tags);
 			List<Tag> allTags = tagService.getAllTags();
 			request.setAttribute("allTags", allTags);
-
-
-
+			
 			int idRecet = Integer.parseInt(request.getParameter("id"));
 			CommentaireService commentaireService = new CommentaireService();
 			List<fr.hb.tpblogrecette.model.Commentaire> commentaires = commentaireService.getCommentaireByRecette(idRecet);
 			request.setAttribute("commentaires", commentaires);
-
-
+			
+			ImageService imageService = new ImageService();
+			Image image = imageService.getImagebyRecette(idRecette);
+			request.setAttribute("image", image);
+			
 			int noteAverage = commentaireService.getNoteAverageFromRecette(idRecette);
 			request.setAttribute("noteAverage", noteAverage);
 
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-
-
 
 		this.getServletContext().getRequestDispatcher("/WEB-INF/recette.jsp").forward(request, response);
 	}
@@ -89,7 +86,6 @@ public class RecetteServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 
 		request.setCharacterEncoding("UTF-8");
 
@@ -104,20 +100,17 @@ public class RecetteServlet extends HttpServlet {
 		recette.setId(idRecette);
 		
 		//ajout tag
-		String sTag= null;
-		sTag = request.getParameter("tag");
+		int idTag = 0;
+		idTag = Integer.parseInt(request.getParameter("tag"));
 
-		if (sTag != null) {
+		if (idTag != 0) {
 			TagService tagService = new TagService();
-			Tag tag = tagService.getTagFromNom(sTag);
+			Tag tag = tagService.getTagFromId(idTag);
 			recet.addTag(tag);
-			
-			
+						
 			recetteService.updateRecette(recet);
 			doGet(request, response);
 		}
-
-
 
 		String auteur = request.getParameter("auteur");
 		if (auteur.isEmpty()) {
@@ -130,10 +123,6 @@ public class RecetteServlet extends HttpServlet {
 		}
 
 		int note = Integer.parseInt(request.getParameter("note"));
-
-
-
-
 
 		Commentaire commentaire = new Commentaire(auteur, contenu, note, new Date() );
 

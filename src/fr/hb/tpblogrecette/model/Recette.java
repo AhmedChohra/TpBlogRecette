@@ -3,9 +3,12 @@
  */
 package fr.hb.tpblogrecette.model;
 
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -19,49 +22,57 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
-import javax.persistence.TemporalType;;
+import javax.persistence.TemporalType;
+
+
 
 @Entity
 @Table(name = "recette")
 public class Recette {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", nullable = false)
 	private int id;
-	
-	
+
+
 	@Column(name = "titre")
 	private String titre;
-	
+
 	@Column(name = "description")
 	private String description;
-	
+
 	@Column(name = "photo")
 	private String photo;
-	
+
 	@Temporal(TemporalType.DATE)
 	private Date dateCreation;
-	
+
 	@ManyToOne (fetch = FetchType.LAZY)
 	@JoinColumn(name="idMembre")
 	private Membre membre;
-	
+
 	@ManyToOne (fetch = FetchType.LAZY)
 	@JoinColumn(name="idCategorie")
 	private Categorie categorie;
-	
-	@OneToMany(mappedBy = "recette", cascade = CascadeType.ALL)
-    private Collection<Commentaire> commentaires;
-	
-	@OneToMany(mappedBy = "recette", cascade = CascadeType.ALL)
-    private Collection<Ingredient> ingredients;
-	
+
+	@OneToMany(mappedBy = "recette")
+	private Collection<Commentaire> commentaires;
+
+	@OneToMany(mappedBy = "recette", fetch = FetchType.LAZY)
+	private Collection<Ingredient> ingredients;
+
 	@ManyToMany(fetch = FetchType.EAGER)
-	private Collection<Tag> tags;
 	
+	private Set<Tag> tags = new HashSet<Tag>();
+	
+	
+
+
+
 	/**
 	 * @param idMembre
 	 * @param idCategorie
@@ -80,18 +91,31 @@ public class Recette {
 		this.dateCreation = dateCreation;
 		this.ingredients = new ArrayList<Ingredient>();
 		this.commentaires = new ArrayList<Commentaire>();
-		this.tags = new ArrayList<Tag>();
+	
+	}
+	public Recette(String titre, String description, Date dateCreation) {
+		super();
+
+		this.titre = titre;
+		this.description = description;
+		this.dateCreation = dateCreation;
+		this.dateCreation = dateCreation;
+		this.ingredients = new ArrayList<Ingredient>();
+		this.commentaires = new ArrayList<Commentaire>();
+	
 	}
 	/**
 	 * 
 	 */
-	
+
 	public Recette() {
 		super();
 		this.ingredients = new ArrayList<Ingredient>();
 		this.commentaires = new ArrayList<Commentaire>();
-		this.tags = new ArrayList<Tag>();
+		
 	}
+	
+	
 	/**
 	 * 
 	 */
@@ -111,7 +135,7 @@ public class Recette {
 	/**
 	 * @return the idMembre
 	 */
-	
+
 	/**
 	 * @return the titre
 	 */
@@ -160,7 +184,7 @@ public class Recette {
 	public void setDateCreation(Date dateCreation) {
 		this.dateCreation = dateCreation;
 	}
-	
+
 	/**
 	 * @return the membre
 	 */
@@ -185,57 +209,84 @@ public class Recette {
 	public void setCategorie(Categorie categorie) {
 		this.categorie = categorie;
 	}
-	
-	
+
+
 	public Collection<Commentaire> getCommentaires(){
-        return commentaires;
-    }
+		return commentaires;
+	}
 
-    public Collection<Commentaire> addCommentaire(Commentaire commentaire){
-    	commentaires.add(commentaire);
-        return  commentaires;
-    }
+	public Collection<Commentaire> addCommentaire(Commentaire commentaire){
+		commentaires.add(commentaire);
+		return  commentaires;
+	}
 
-    public Collection<Commentaire> deleteCommentaire(Commentaire commentaire){
-    	commentaires.remove(commentaire);
-        return commentaires;
-    }
-    
-    public Collection<Ingredient> getIngredients(){
-        return ingredients;
-    }
+	public Collection<Commentaire> deleteCommentaire(Commentaire commentaire){
+		commentaires.remove(commentaire);
+		return commentaires;
+	}
 
-    public Collection<Ingredient> addIngredient(Ingredient ingredient){
-    	ingredients.add(ingredient);
-        return  ingredients;
-    }
+	public Collection<Ingredient> getIngredients(){
+		return ingredients;
+	}
 
-    public Collection<Ingredient> deleteIngredient(Ingredient ingredient){
-    	ingredients.remove(ingredient);
-        return ingredients;
-    }
-    
+	public Collection<Ingredient> addIngredient(Ingredient ingredient){
+		ingredients.add(ingredient);
+		return  ingredients;
+	}
+
+	public Collection<Ingredient> deleteIngredient(Ingredient ingredient){
+		ingredients.remove(ingredient);
+		return ingredients;
+	}
+
 	public Collection<Tag> getTags(){
-        return tags;
-    }
+		return tags;
+	}
 
-    public Collection<Tag> addTag(Tag tag){
-    	tags.add(tag);
-        return  tags;
-    }
+	public void addTag(Tag tag){
+		this.tags.add(tag);
+		
+	}
 
-    public Collection<Tag> deleteTag(Tag tag){
-    	tags.remove(tag);
-        return tags;
-    }
+	public Set<Tag> deleteTag(Tag tag){
+		this.tags.remove(tag);
+		return tags;
+		
+		
+		
+	}
 	@Override
 	public String toString() {
 		return "Recette [id=" + id + ", idMembre=" + ", idCategorie=" + ", titre=" + titre
 				+ ", description=" + description + ", photo=" + photo + ", dateCreation=" + dateCreation + "]";
 	}
+	/**
+	 * @param tags the tags to set
+	 */
+	public void setTags(Set<Tag> tags) {
+		this.tags = tags;
+	}
+	/**
+	 * @param commentaires the commentaires to set
+	 */
+	public void setCommentaires(Collection<Commentaire> commentaires) {
+		this.commentaires = commentaires;
+	}
+	/**
+	 * @param ingredients the ingredients to set
+	 */
+	public void setIngredients(Collection<Ingredient> ingredients) {
+		this.ingredients = ingredients;
+	}
 	
 	
+	/**
+	 * @param arrayList the tags to set
+	 */
 	
-	
-	
+
+
+
+
+
 }

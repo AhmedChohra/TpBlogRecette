@@ -1,10 +1,10 @@
 package fr.hb.tpblogrecette.services;
 
 
-import java.sql.SQLException;
+
 
 import java.util.List;
-import java.util.ArrayList;
+
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;

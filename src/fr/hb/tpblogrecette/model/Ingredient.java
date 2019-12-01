@@ -122,7 +122,7 @@ public class Ingredient {
 		return "Ingredient [id=" + id + ", nom=" + nom + ", quantite=" + quantite
 				+ ", unit=" + unit + "]";
 	}
-
+	
 
 
 

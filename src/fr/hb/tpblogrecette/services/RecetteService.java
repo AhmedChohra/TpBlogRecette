@@ -11,7 +11,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Query;
 import javax.persistence.criteria.From;
@@ -23,7 +26,9 @@ import fr.hb.tpblogrecette.model.Categorie;
 import fr.hb.tpblogrecette.model.Commentaire;
 import fr.hb.tpblogrecette.model.Membre;
 import fr.hb.tpblogrecette.model.Recette;
+import fr.hb.tpblogrecette.model.Tag;
 import fr.hb.tpblogrecette.utils.HibernateUtil;
+import net.bytebuddy.asm.Advice.This;
 
 
 
@@ -84,7 +89,7 @@ public class RecetteService {
 		try (Session session = HibernateUtil.getSessionFactory().openSession()){
 			transaction = session.beginTransaction();
 			if (recette != null) {
-				session.update(recette);
+				session.saveOrUpdate(recette);
 				session.flush();
 			}
 			transaction.commit();
@@ -154,12 +159,12 @@ public class RecetteService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-	
-	
-	return recettesByCategorie;
+
+
+
+		return recettesByCategorie;
 	}
-	
+
 	public List<Recette> getRecetteByTag(int id){
 
 		List<Recette> recettesByTag = null;
@@ -175,38 +180,52 @@ public class RecetteService {
 			e.printStackTrace();
 		}
 
-	return recettesByTag;
+		return recettesByTag;
 	}
 
+	public List getRecetteAndTagFromId(int idRecette ){
 
+		Transaction transaction = null;
+		List recette = null;
 
+		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+			String hql = "SELECT recette, tag from Recette recette LEFT JOIN recette.tags tag WHERE recette.id = :id";
+			Query query = session.createQuery(hql);
+			query.setParameter("id", idRecette);
+			recette = (ArrayList) query.getResultList(); 
 
-	/*List<Recette> recettesByCategorie = new ArrayList<>();
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			e.printStackTrace();
+		}
+		return recette;
+	}
 
-		Recette recetteByCategorie = null;
+	public void deleteTag(Recette recette, Tag tag) {
 
+		Set<Tag> tags = recette.deleteTag(tag);
 
-		String query = "SELECT * FROM recette WHERE idCategorie = ?" ;
+		// supprimer le tag de la liste et retourner la liste 
 
-		PreparedStatement ps = connection.prepareStatement(query);
+		// Réinitialiser les tags a null
+		recette.setTags(new HashSet<Tag>());
+		for (Tag tagCompare : tags) {
+			if(tagCompare.getId() != tag.getId() ) {
+				recette.addTag(tagCompare);
+				//tagCompare.addRecette(recette);
+			} else {
+				recette.deleteTag(tag);
+			}
+		}
+		
+		// ajouter la liste modifiée _ 
+		this.updateRecette(recette);
 
-		ps.setInt(1, idcategorie);
-
-		ResultSet rSet = ps.executeQuery();
-
-		while (rSet.next()) {
-			recetteByCategorie = new Recette();
-
-			recetteByCategorie.setId(rSet.getInt("id"));
-			recetteByCategorie.setTitre(rSet.getString("titre"));
-			recetteByCategorie.setDescription(rSet.getString("description"));
-			recetteByCategorie.setPhoto(rSet.getString("photo"));
-			recetteByCategorie.setDateCreation(rSet.getDate("dateCreation"));
-			recettesByCategorie.add(recetteByCategorie);
-
-
-		}*/
-
-	
+	}
 
 }
+
+
+
