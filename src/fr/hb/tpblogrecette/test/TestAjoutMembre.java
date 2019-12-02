@@ -1,21 +1,14 @@
 package fr.hb.tpblogrecette.test;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
 
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.Transaction;
-import org.hibernate.query.Query;
 
-import fr.hb.tpblogrecette.model.Categorie;
-import fr.hb.tpblogrecette.model.Commentaire;
-import fr.hb.tpblogrecette.model.Ingredient;
-import fr.hb.tpblogrecette.model.Membre;
-import fr.hb.tpblogrecette.model.Recette;
+
+
 
 
 public class TestAjoutMembre {
@@ -23,6 +16,7 @@ public class TestAjoutMembre {
 	protected Session session;
 	protected SessionFactory sessionFactory;
 
+	@SuppressWarnings("unused")
 	public static void main(String args[]) throws Exception{
 
 		SessionFactory sf = new Configuration().configure().buildSessionFactory();

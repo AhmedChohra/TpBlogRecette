@@ -14,13 +14,12 @@ import fr.hb.tpblogrecette.utils.HibernateUtil;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-
-import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
 public class TestCategorieService extends TestCase {
 	
+	@SuppressWarnings("unused")
 	private static SessionFactory sessionFactory = null;
 	private static CategorieService categorieService = null;
 	private static Categorie categorieTest = null;
@@ -98,6 +97,7 @@ public class TestCategorieService extends TestCase {
 	public void testUpdateCategorie() throws Exception{
 		
 		//Creer un jeu de tests (arrange)
+		@SuppressWarnings({ "deprecation", "unused" })
 		Date newDate = new Date("2019/11/04");
 		
 		//membre.setId(4);

@@ -5,30 +5,24 @@ package fr.hb.tpblogrecette.services;
 
 
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+
 import java.util.ArrayList;
-import java.util.Collection;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Query;
-import javax.persistence.criteria.From;
+
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import fr.hb.tpblogrecette.model.Categorie;
-import fr.hb.tpblogrecette.model.Commentaire;
-import fr.hb.tpblogrecette.model.Membre;
+
 import fr.hb.tpblogrecette.model.Recette;
 import fr.hb.tpblogrecette.model.Tag;
 import fr.hb.tpblogrecette.utils.HibernateUtil;
-import net.bytebuddy.asm.Advice.This;
+
 
 
 
@@ -117,6 +111,7 @@ public class RecetteService {
 		} 
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Recette> getAllRecettes(){
 		Transaction transaction = null;
 		List <Recette> listOfRecette = null;
@@ -145,6 +140,7 @@ public class RecetteService {
 
 
 
+	@SuppressWarnings("unchecked")
 	public List<Recette> getRecetteByCategorie(int idCategorie){
 
 		List<Recette> recettesByCategorie = null;
@@ -165,6 +161,7 @@ public class RecetteService {
 		return recettesByCategorie;
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Recette> getRecetteByTag(int id){
 
 		List<Recette> recettesByTag = null;
@@ -183,6 +180,7 @@ public class RecetteService {
 		return recettesByTag;
 	}
 
+	@SuppressWarnings({ "rawtypes", "unused" })
 	public List getRecetteAndTagFromId(int idRecette ){
 
 		Transaction transaction = null;

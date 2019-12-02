@@ -101,6 +101,7 @@ public class IngredientService {
 		} 
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Ingredient> getAllIngredients(){
 		Transaction transaction = null;
 		List <Ingredient> listOfIngredient = null;
@@ -125,6 +126,7 @@ public class IngredientService {
 	}
 
 
+	@SuppressWarnings("unchecked")
 	public List<Ingredient> getIngredientFromRecette(int idRecette){
 
 
@@ -135,6 +137,7 @@ public class IngredientService {
 
 			// get an user object
 			String hql = "SELECT ingredient from Ingredient  ingredient join ingredient.recette as recette WHERE recette.id = :idRecette";
+			@SuppressWarnings("rawtypes")
 			Query query = session.createQuery(hql);
 			query.setParameter("idRecette", idRecette);
 

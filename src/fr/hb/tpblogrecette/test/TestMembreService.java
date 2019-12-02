@@ -8,20 +8,20 @@ import org.junit.Before;
 import org.junit.Test;
 
 import fr.hb.tpblogrecette.model.Membre;
-import fr.hb.tpblogrecette.model.Recette;
+
 import fr.hb.tpblogrecette.services.MembreService;
 
 import fr.hb.tpblogrecette.utils.HibernateUtil;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-import java.sql.Connection;
-import java.sql.SQLException;
+
 import java.util.Date;
 import java.util.List;
 
 public class TestMembreService extends TestCase {
 	
+	@SuppressWarnings("unused")
 	private static SessionFactory sessionFactory = null;
 	private static MembreService membreService = null;
 	private static Membre membreTest = null;
@@ -54,6 +54,7 @@ public class TestMembreService extends TestCase {
 		
 	}
 
+	@SuppressWarnings("deprecation")
 	@Test
 	public void testCreateMembre() throws Exception {
 		
@@ -75,6 +76,7 @@ public class TestMembreService extends TestCase {
 		
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Test
 	public void testGetMembreFromId() throws Exception {
 
@@ -91,10 +93,12 @@ public class TestMembreService extends TestCase {
 		
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Test
 	public void testUpdateMembre() throws Exception{
 		
 		//Creer un jeu de tests (arrange)
+		
 		Date newDate = new Date("2019/11/04");
 		//Membre membre = new Membre("membre apres update", "tupdate", "5623", "test_u@test.fr", newDate);
 		//membre.setId(4);

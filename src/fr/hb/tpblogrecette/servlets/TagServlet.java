@@ -1,7 +1,7 @@
 package fr.hb.tpblogrecette.servlets;
 
 import java.io.IOException;
-import java.util.Date;
+
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -11,9 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import fr.hb.tpblogrecette.model.Membre;
 import fr.hb.tpblogrecette.model.Tag;
-import fr.hb.tpblogrecette.services.MembreService;
+
 import fr.hb.tpblogrecette.services.TagService;
 
 /**
@@ -57,7 +56,7 @@ public class TagServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		String erreur = "";
-		Date dateInscription = new Date();
+		
 
 		String nom = request.getParameter("nom");
 		if (nom.isEmpty()) {

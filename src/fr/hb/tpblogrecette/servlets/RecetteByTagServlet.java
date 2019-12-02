@@ -1,7 +1,7 @@
 package fr.hb.tpblogrecette.servlets;
 
 import java.io.IOException;
-import java.sql.Connection;
+
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import fr.hb.tpblogrecette.model.Recette;
 import fr.hb.tpblogrecette.model.Tag;
-import fr.hb.tpblogrecette.services.CategorieService;
+
 import fr.hb.tpblogrecette.services.RecetteService;
 import fr.hb.tpblogrecette.services.TagService;
 
@@ -35,7 +35,7 @@ public class RecetteByTagServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Connection connection;
+		
 		try {
 			
 			

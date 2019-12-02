@@ -8,20 +8,19 @@ import org.junit.Before;
 import org.junit.Test;
 
 import fr.hb.tpblogrecette.model.Commentaire;
-import fr.hb.tpblogrecette.model.Recette;
+
 import fr.hb.tpblogrecette.services.CommentaireService;
 
 import fr.hb.tpblogrecette.utils.HibernateUtil;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-
-import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
 public class TestCommentaireService extends TestCase {
 	
+	@SuppressWarnings("unused")
 	private static SessionFactory sessionFactory = null;
 	private static CommentaireService commentaireService = null;
 	private static Commentaire commentaireTest = null;
@@ -53,6 +52,7 @@ public class TestCommentaireService extends TestCase {
 		
 	}
 
+	@SuppressWarnings("deprecation")
 	@Test
 	public void testCreateCommentaire() throws Exception {
 
@@ -70,6 +70,7 @@ public class TestCommentaireService extends TestCase {
 		
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Test
 	public void testGetCommentaireFromId() throws Exception {
 
@@ -98,6 +99,7 @@ public class TestCommentaireService extends TestCase {
 	}
 	
 	
+	@SuppressWarnings("deprecation")
 	@Test
 	public void testUpdateCommentaire() throws Exception{
 		

@@ -3,19 +3,14 @@
  */
 package fr.hb.tpblogrecette.test;
 
-import java.util.Date;
+
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+
 import org.hibernate.cfg.Configuration;
 
 
-import fr.hb.tpblogrecette.model.Categorie;
-import fr.hb.tpblogrecette.model.Commentaire;
-import fr.hb.tpblogrecette.model.Ingredient;
-import fr.hb.tpblogrecette.model.Membre;
-import fr.hb.tpblogrecette.model.Recette;
 
 class TestHibernate {
 
@@ -25,6 +20,7 @@ class TestHibernate {
 	public static void main(String args[]) throws Exception {
 		SessionFactory sf = new Configuration().configure().buildSessionFactory();
 		SessionFactory sessionFactory = sf;
+		@SuppressWarnings("unused")
 		Session session = sessionFactory.openSession();
 		
 		

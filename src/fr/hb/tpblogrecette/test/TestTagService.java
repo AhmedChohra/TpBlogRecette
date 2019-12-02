@@ -20,6 +20,7 @@ import java.util.List;
 public class TestTagService extends TestCase{
 
 
+	@SuppressWarnings("unused")
 	private static SessionFactory sessionFactory = null;
 	private static TagService tagService = null;
 	private static Tag tagTest = null;
@@ -88,6 +89,7 @@ public class TestTagService extends TestCase{
 
 	}
 
+	@SuppressWarnings({ "deprecation", "unused" })
 	@Test
 	public void testUpdateTag() throws Exception {
 

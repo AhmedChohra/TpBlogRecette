@@ -1,28 +1,19 @@
 package fr.hb.tpblogrecette.servlets;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Set;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.transaction.HeuristicMixedException;
-import javax.transaction.HeuristicRollbackException;
-import javax.transaction.RollbackException;
-import javax.transaction.SystemException;
-import javax.transaction.Transaction;
-
-import org.hibernate.Session;
 
 import fr.hb.tpblogrecette.model.Recette;
 import fr.hb.tpblogrecette.model.Tag;
 import fr.hb.tpblogrecette.services.RecetteService;
 import fr.hb.tpblogrecette.services.TagService;
-import fr.hb.tpblogrecette.utils.HibernateUtil;
+
 
 /**
  * Servlet implementation class DeleteTagFromRecipe

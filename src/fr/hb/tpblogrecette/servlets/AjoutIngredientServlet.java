@@ -8,11 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import fr.hb.tpblogrecette.model.Categorie;
+
+
 import fr.hb.tpblogrecette.model.Ingredient;
-import fr.hb.tpblogrecette.model.Membre;
+
 import fr.hb.tpblogrecette.model.Recette;
 import fr.hb.tpblogrecette.services.IngredientService;
 import fr.hb.tpblogrecette.services.RecetteService;
@@ -62,7 +62,7 @@ public class AjoutIngredientServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		HttpSession session = request.getSession();
+		
 		
 		
 		String erreur = "";

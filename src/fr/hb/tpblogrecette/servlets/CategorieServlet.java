@@ -2,8 +2,8 @@ package fr.hb.tpblogrecette.servlets;
 
 import java.io.IOException;
 import java.util.List;
-import java.sql.Connection;
-import java.sql.SQLException;
+
+
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -38,7 +38,7 @@ public class CategorieServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		Connection connection;
+		
 		try {
 			
 

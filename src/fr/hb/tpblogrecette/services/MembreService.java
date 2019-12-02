@@ -1,7 +1,7 @@
 package fr.hb.tpblogrecette.services;
 
 
-import java.sql.SQLException;
+
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import org.hibernate.Transaction;
 
 
 import fr.hb.tpblogrecette.model.Membre;
-import fr.hb.tpblogrecette.model.Recette;
+
 import fr.hb.tpblogrecette.utils.HibernateUtil;
 
 
@@ -104,6 +104,7 @@ public class MembreService {
 
 	} 
 
+	@SuppressWarnings("unchecked")
 	public List<Membre> getAllMembres(){
 		Transaction transaction = null;
 		List <Membre> listOfMembre = null;
@@ -143,7 +144,8 @@ public class MembreService {
 			query.setParameter("mdp", mdp);
 			
 			
-            List list = query.getResultList();
+            @SuppressWarnings("rawtypes")
+			List list = query.getResultList();
             membre = (Membre)list.toArray()[0];
             transaction.commit();
 			

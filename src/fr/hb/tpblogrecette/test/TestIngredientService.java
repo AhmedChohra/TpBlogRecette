@@ -8,20 +8,19 @@ import org.junit.Before;
 import org.junit.Test;
 
 import fr.hb.tpblogrecette.model.Ingredient;
-import fr.hb.tpblogrecette.model.Recette;
+
 import fr.hb.tpblogrecette.services.IngredientService;
 
 import fr.hb.tpblogrecette.utils.HibernateUtil;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
 public class TestIngredientService extends TestCase {
 	
+	@SuppressWarnings("unused")
 	private static SessionFactory sessionFactory = null;
 	private static IngredientService ingredientService = null;
 	private static Ingredient ingredientTest = null;
@@ -98,10 +97,12 @@ public class TestIngredientService extends TestCase {
 	}
 	
 	
+	@SuppressWarnings("deprecation")
 	@Test
 	public void testUpdateIngredient() throws Exception{
 		
 		//Creer un jeu de tests (arrange)
+		@SuppressWarnings("unused")
 		Date newDate = new Date("2019/11/04");
 		
 		

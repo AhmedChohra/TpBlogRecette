@@ -4,13 +4,12 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8" />
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css"
 	rel="stylesheet">
 <link rel="stylesheet" href="css/style.css" />
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <script src="https://code.iconify.design/1/1.0.3/iconify.min.js"></script>
 </head>
 <body>

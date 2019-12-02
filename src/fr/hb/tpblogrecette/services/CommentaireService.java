@@ -7,16 +7,15 @@ package fr.hb.tpblogrecette.services;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
+
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
-import fr.hb.tpblogrecette.model.Categorie;
+
 import fr.hb.tpblogrecette.model.Commentaire;
-import fr.hb.tpblogrecette.model.Membre;
-import fr.hb.tpblogrecette.model.Recette;
+
 import fr.hb.tpblogrecette.utils.HibernateUtil;
 
 /**
@@ -108,6 +107,7 @@ public class CommentaireService {
 		} 
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Commentaire> getAllCommentaires(){
 		Transaction transaction = null;
 		List <Commentaire> listOfCommentaire = null;
@@ -131,16 +131,19 @@ public class CommentaireService {
 		return listOfCommentaire;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Commentaire> getCommentaireByRecette(int idRecet){
 		List<Commentaire> commentairesByRecette = new ArrayList<>();
 		
+		@SuppressWarnings("unused")
 		Commentaire commentaireByRecette = null;
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 	         // start a transaction
 	        
 	         // get an user object
 	        String hql = "SELECT commentaire from Commentaire commentaire join commentaire.recette as recette WHERE recette.id = :id";
-	        Query query = session.createQuery(hql);
+	        @SuppressWarnings("rawtypes")
+			Query query = session.createQuery(hql);
 	        query.setParameter("id", idRecet);
 	        
 	        commentairesByRecette = (List<Commentaire>) query.getResultList();
@@ -151,6 +154,7 @@ public class CommentaireService {
 		
 		return commentairesByRecette;
 	}
+@SuppressWarnings("deprecation")
 public int getNoteAverageFromRecette(int idRecette){
 		
 	int noteAverage = 0;
@@ -159,6 +163,7 @@ public int getNoteAverageFromRecette(int idRecette){
 
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 			String avgHql = "SELECT floor(avg(note))  from Commentaire C where C.recette = :id";
+			@SuppressWarnings("rawtypes")
 			Query query = session.createQuery(avgHql);
 			query.setInteger("id", idRecette);
 			

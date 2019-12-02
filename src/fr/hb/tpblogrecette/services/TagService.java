@@ -6,7 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
-import fr.hb.tpblogrecette.model.Membre;
+
 import fr.hb.tpblogrecette.model.Tag;
 import fr.hb.tpblogrecette.utils.HibernateUtil;
 
@@ -86,6 +86,7 @@ public class TagService {
 		} 
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Tag> getAllTags(){
 		Transaction transaction = null;
 		List <Tag> listOfTag = null;
@@ -109,6 +110,7 @@ public class TagService {
 		return listOfTag;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Tag> getTagbyRecette(int idRecette){
 
 
@@ -119,6 +121,7 @@ public class TagService {
 
 			// get an user object
 			String hql = "SELECT t from Tag t join t.recettes r WHERE r.id = :id";
+			@SuppressWarnings("rawtypes")
 			Query query = session.createQuery(hql);
 			query.setParameter("id", idRecette);
 
@@ -134,6 +137,7 @@ public class TagService {
 	
 	public Tag getTagFromNom(String nom) {
 
+		@SuppressWarnings("unused")
 		Transaction transaction=null;
 		Tag tag = new Tag();
 
@@ -141,8 +145,10 @@ public class TagService {
 			
 			
 			String hql = "FROM Tag T WHERE T.nom = :nom";
+			@SuppressWarnings("rawtypes")
 			Query query = session.createQuery(hql);
 			query.setParameter("nom", nom);
+			@SuppressWarnings("rawtypes")
 			List list = query.getResultList();
             tag = (Tag)list.toArray()[0];
 			

@@ -19,6 +19,7 @@ import java.util.List;
 
 public class TestRecetteService extends TestCase {
 	
+	@SuppressWarnings("unused")
 	private static SessionFactory sessionFactory = null;
 	private static RecetteService recetteService = null;
 	private static Recette recetteTest = null;
@@ -51,6 +52,7 @@ public class TestRecetteService extends TestCase {
 		
 	}
 
+	@SuppressWarnings("deprecation")
 	@Test
 	public void testCreateRecette() throws Exception {
 
@@ -68,6 +70,7 @@ public class TestRecetteService extends TestCase {
 		
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Test
 	public void testGetRecetteFromId() throws Exception {
 
@@ -96,6 +99,7 @@ public class TestRecetteService extends TestCase {
 	}
 	
 	
+	@SuppressWarnings("deprecation")
 	@Test
 	public void testUpdateRecette() throws Exception {
 		

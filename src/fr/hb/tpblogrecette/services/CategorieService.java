@@ -1,7 +1,5 @@
 package fr.hb.tpblogrecette.services;
 
-import java.sql.SQLException;
-
 import java.util.List;
 
 import org.hibernate.Session;
@@ -105,6 +103,7 @@ public class CategorieService {
 	}
 
 	
+	@SuppressWarnings("unchecked")
 	public List<Categorie> getAllCategories(){
 
 		Transaction transaction = null;

@@ -7,7 +7,7 @@ import javax.persistence.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import fr.hb.tpblogrecette.model.Commentaire;
+
 import fr.hb.tpblogrecette.model.Image;
 import fr.hb.tpblogrecette.utils.HibernateUtil;
 
