@@ -99,7 +99,10 @@ public class RecetteServlet extends HttpServlet {
 		
 		//ajout tag
 		int idTag = 0;
-		idTag = Integer.parseInt(request.getParameter("tag"));
+		if (request.getParameter("tag") != null) {
+			idTag = Integer.parseInt(request.getParameter("tag"));
+		}
+		
 
 		if (idTag != 0) {
 			TagService tagService = new TagService();

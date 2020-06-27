@@ -82,7 +82,7 @@ public class AjoutRecetteServlet extends HttpServlet {
 			erreur += "Veuillez saisir un nom de fichier image<br>";
 		}*/
 		//ajout image
-				String savePath = "C:\\Users\\HB\\Documents\\eclipse-workspace\\TpBlogRecette\\WebContent\\img" + File.separator /*+ SAVE_DIR*/; //specify your path here
+				String savePath = "D:\\doc_hb\\eclipse-workspace\\TpBlogRecette\\WebContent\\img" + File.separator /*+ SAVE_DIR*/; //specify your path here
 				File fileSaveDir=new File(savePath);
 				if(!fileSaveDir.exists()){
 					fileSaveDir.mkdir();

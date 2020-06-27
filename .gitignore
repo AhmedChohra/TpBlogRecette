@@ -3,3 +3,4 @@ WebContent/WEB-INF/lib/*
 build/*
 .settings/*
 WebContent/img
+/build/
